@@ -1,0 +1,78 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+		<script
+			crossorigin
+			src="https://unpkg.com/react@18/umd/react.production.min.js"
+		></script>
+		<script
+			crossorigin
+			src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+		></script>
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="text/babel">
+			class App extends React.Component {
+				state = {
+					name: "Ryu",
+					age: 30,
+				};
+				handleClick = (event) => {
+					// console.log(event.target);
+					this.setState({
+						name: "Yoshi",
+						age: 79,
+					});
+					console.log(this.state);
+				};
+				handleHover(event) {
+					console.log(event.target, event.pageX, event.pageY);
+				}
+				handleCopy(event) {
+					console.log("Try being original!");
+				}
+				handleNameInput = (event) => {
+					this.setState({
+						name: event.target.value,
+					});
+				};
+				handleFormSubmit = (event) => {
+					event.preventDefault();
+					console.log("Form Submitted:", this.state.name);
+				};
+				render() {
+					return (
+						<div className="app-content">
+							<h1>Hello World!</h1>
+							<p>
+								Welcome to ReactJS: {this.state.name},
+								{this.state.age} years old.
+							</p>
+							<button onClick={this.handleClick}>Click Me</button>
+							<button onMouseOver={this.handleHover}>
+								Hover Me
+							</button>
+							<p onCopy={this.handleCopy}>
+								What we think, we become!
+							</p>
+							<br />
+							<form onSubmit={this.handleFormSubmit}>
+								<input
+									type="text"
+									onChange={this.handleNameInput}
+								/>
+								<button>Submit</button>
+							</form>
+						</div>
+					);
+				}
+			}
+			ReactDOM.render(<App />, document.getElementById("app"));
+		</script>
+	</body>
+</html>
